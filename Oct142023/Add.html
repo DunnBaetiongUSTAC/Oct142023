@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="Content/bootstrap-grid.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="row p-2">
+        
+            <label>Last Name</label>
+            <input type="text" id="LastName" placeholder="Enter LastName" />
+            <br />
+
+            <label>First Name</label>
+            <input type="text" id="FirstName" placeholder="Enter FirstName" />
+            <br />
+
+            <button class="btn-primary" id="btnsave">Save</button>
+        
+    </div>
+
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnsave").click(function () {
+                AddPerson();
+            });
+        });
+        function AddPerson() {
+            var persondata = new Object();
+            persondata.LastName = $("#LastName").val();
+            persondata.FirstName = $("#FirstName").val();
+            $.ajax({
+                type: "Post",
+                url: "api/People",
+                dataType: 'json',
+                data: persondata,
+                beforeSend: function (data) {
+                },
+                complete: function (data) {
+                   
+                },
+                success: function (data) {
+                    alert("Success");
+                },
+                error: function (data) {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
