@@ -47,6 +47,8 @@
                     alert("Success");
                 },
                 error: function (data) {
+                    var error = JSON.parse(data.responseText);
+                    console.log(data.responseText);
                     alert("Error");
                 }
             });
