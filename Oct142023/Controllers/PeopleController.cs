@@ -71,18 +71,19 @@ namespace Oct142023.Controllers
         }
 
         // POST: api/People
-        [ResponseType(typeof(Person))]
-        public IHttpActionResult PostPerson(Person person)
+        [ResponseType(typeof(Table))]
+        public HttpResponseMessage PostPerson(Table person)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, new Exception("Invalid Model"));
+                return response;
             }
 
-            db.People.Add(person);
+            db.Table.Add(person);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = person.Id }, person);
+            var okresponse = Request.CreateResponse<Table>(HttpStatusCode.OK, person);
+            return okresponse;
         }
 
         // DELETE: api/People/5
